@@ -93,10 +93,12 @@ void SYS_Initialize(void* data) {
     CFGCONbits.PMDLOCK = 1;
     SYSKEY = 0x33333333;
 
-    /* Configure CP0.K0 for optimal performance (cached instruction pre-fetch) */
-    __builtin_mtc0(16, 0, (__builtin_mfc0(16, 0) | 0x3));
+    //Configure CP0.K0 for cache policy
+    //Write back, write allocate cache policy.
+    __builtin_mtc0(16, 0, ((__builtin_mfc0(16, 0) & ~0x03) | 0x03));
     /* Configure Wait States and Prefetch */
     CHECONbits.PFMWS = 3;
+    //TODO Check chip revision to see if this can be enabled - currently disabled per errata
     CHECONbits.PREFEN = 0;
     INTCONbits.MVEC = 1;
 }
