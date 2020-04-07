@@ -13,16 +13,24 @@
 #include "led.h"
 #include "pins.h"
 #include "delays.h"
+#include "power.h"
 
 int main(void) {
     SYS_Initialize(NULL);
     initPins();
     LED1Off();
-    LED2On();
+    LED2Off();
+    SATPowerOn();
+    AUX5VPowerOn();
     while (true) {
-        LED1Toggle();
-        LED2Toggle();
-        delay_ms(1000);
+        if (AUX5VGood()) {
+            LED1On();
+        } else {
+            LED1Off();
+        }
+        //LED1Toggle();
+        //LED2Toggle();
+        //delay_ms(1000);
     };
     return ( EXIT_FAILURE);
 }

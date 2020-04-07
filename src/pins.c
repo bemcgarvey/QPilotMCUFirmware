@@ -36,6 +36,7 @@ void initPins(void) {
     TRISE = 0;
     TRISF = 0;
     TRISG = 0;
+    CNPUGbits.CNPUG8 = 1; //pull-up on for AUX_5V_OC
     TRISGbits.TRISG8 = 1; //AUX_5V_OC
 }
 
