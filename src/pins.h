@@ -16,6 +16,7 @@
 // RA4 = Switch
 // RA7 = OC5
 // RA8 = U2RX = Sat1
+// RA10 = LED1
 // RA11 = SCK4in
 // RA12 = SDI4
 //
@@ -27,7 +28,7 @@
 // RB5 = U5CTS
 // RB6 = U5RX
 // RB7 = U5RTS
-// RB8 = LED2
+// RB9 = LED2
 // RB10 = OC15
 // RB11 = OC16
 // RB12 = OC8
@@ -43,7 +44,6 @@
 // RC9 = OC6
 // RC10 = U5TX
 // RC11 = FMU_INT
-// RC13 = LED1
 //
 // RD5 = OC13
 // RD6 = OC2
