@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////
 // Project: QPilot MCU                             //
-// File: power.c                                    //
+// File: power.c                                   //
 // Target: PIC32MKxxxxGPD/E064                     // 
 // Compiler: XC32                                  //
 // Author: Brad McGarvey                           //

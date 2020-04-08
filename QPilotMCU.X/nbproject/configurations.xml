@@ -10,6 +10,7 @@
       <itemPath>../src/delays.h</itemPath>
       <itemPath>../src/device.h</itemPath>
       <itemPath>../src/power.h</itemPath>
+      <itemPath>../src/debug.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -24,6 +25,7 @@
       <itemPath>../src/delays.c</itemPath>
       <itemPath>../src/initialization.c</itemPath>
       <itemPath>../src/power.c</itemPath>
+      <itemPath>../src/debug.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

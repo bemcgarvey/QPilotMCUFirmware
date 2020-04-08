@@ -31,6 +31,7 @@ void initPins(void) {
     TRISAbits.TRISA4 = 1; //Switch
     TRISB = 0;
     TRISBbits.TRISB2 = 1; //AN4 - I_SENSE
+    TRISBbits.TRISB6 = 1;
     TRISC = 0;
     TRISD = 0;
     TRISE = 0;

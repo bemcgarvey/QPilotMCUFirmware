@@ -14,31 +14,34 @@
 #include "pins.h"
 #include "delays.h"
 #include "power.h"
+#include "debug.h"
 
 int main(void) {
     SYS_Initialize(NULL);
     initPins();
+    setPPS();
+    initDebug();
     LED1Off();
     LED2Off();
-    SATPowerOn();
-    AUX5VPowerOn();
     while (true) {
-        if (AUX5VGood()) {
-            LED1On();
-        } else {
-            LED1Off();
+        char c = _mon_getc(false);
+        if (c != EOF) {
+            printf("rx: %c\r\n", c);
+            if (c == '1') {
+                LED1Toggle();
+            }
+            if (c == '2') {
+                LED2Toggle();
+            }
         }
-        //LED1Toggle();
-        //LED2Toggle();
-        //delay_ms(1000);
     };
     return ( EXIT_FAILURE);
 }
 
 void _nmi_handler(void) {
-    
-    
-    
+
+
+
     //Clear BEV flag
     _CP0_BIC_STATUS(_CP0_STATUS_BEV_MASK);
     __asm__("ERET");
