@@ -20,9 +20,9 @@
 #pragma config DBGPER =     PG_ALL
 #pragma config SMCLR =      MCLR_NORM
 #pragma config SOSCGAIN =   GAIN_2X
-#pragma config SOSCBOOST =  ON
-#pragma config POSCGAIN =   GAIN_LEVEL_3
-#pragma config POSCBOOST =  ON
+#pragma config SOSCBOOST =  OFF
+#pragma config POSCGAIN =   GAIN_LEVEL_0
+#pragma config POSCBOOST =  OFF
 #pragma config EJTAGBEN =   NORMAL
 
 /*** DEVCFG1 ***/

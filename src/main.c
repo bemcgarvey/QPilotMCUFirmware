@@ -19,21 +19,25 @@
 int main(void) {
     SYS_Initialize(NULL);
     initPins();
+    releaseFMU();
     setPPS();
     initDebug();
     LED1Off();
-    LED2Off();
+    LED2On();
     while (true) {
-        char c = _mon_getc(false);
-        if (c != EOF) {
-            printf("rx: %c\r\n", c);
-            if (c == '1') {
-                LED1Toggle();
-            }
-            if (c == '2') {
-                LED2Toggle();
-            }
-        }
+//        char c = _mon_getc(false);
+//        if (c != EOF) {
+//            printf("rx: %c\r\n", c);
+//            if (c == '1') {
+//                LED1Toggle();
+//            }
+//            if (c == '2') {
+//                LED2Toggle();
+//            }
+//        }
+        LED1Toggle();
+        LED2Toggle();
+        delay_ms(1000);
     };
     return ( EXIT_FAILURE);
 }

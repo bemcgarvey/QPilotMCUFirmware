@@ -14,6 +14,7 @@ void initPins(void) {
     //Set all pins to digital output low level
     LATA = 0;
     LATB = 0;
+    LATBbits.LATB15 = 1; //Don't reset FMU
     LATC = 0;
     LATD = 0;
     LATE = 0;
@@ -31,7 +32,8 @@ void initPins(void) {
     TRISAbits.TRISA4 = 1; //Switch
     TRISB = 0;
     TRISBbits.TRISB2 = 1; //AN4 - I_SENSE
-    TRISBbits.TRISB6 = 1;
+    TRISBbits.TRISB6 = 1; //U5RX
+    TRISBbits.TRISB15 = 1; //FMU_reset - input releases FMU
     TRISC = 0;
     TRISD = 0;
     TRISE = 0;
