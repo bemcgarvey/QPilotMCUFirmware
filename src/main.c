@@ -15,29 +15,38 @@
 #include "delays.h"
 #include "power.h"
 #include "debug.h"
+#include "spi.h"
 
 int main(void) {
     SYS_Initialize(NULL);
     initPins();
     releaseFMU();
     setPPS();
+    initMCUtoFMUchannel();
     initDebug();
     LED1Off();
     LED2On();
     while (true) {
-//        char c = _mon_getc(false);
-//        if (c != EOF) {
-//            printf("rx: %c\r\n", c);
-//            if (c == '1') {
-//                LED1Toggle();
-//            }
-//            if (c == '2') {
-//                LED2Toggle();
-//            }
-//        }
-        LED1Toggle();
-        LED2Toggle();
-        delay_ms(1000);
+        char c = _mon_getc(false);
+        if (c != EOF) {
+            //printf("rx: %c\r\n", c);
+            if (c == '1') {
+                LED1Toggle();
+            }
+            if (c == '2') {
+                LED2Toggle();
+            }
+            if (c == 'f' || c == 'g') {
+                char rx;
+                transferMCUtoFMU(&c, 1, &rx, 1);
+                printf("rx = %02x\r\n\r\n", rx);
+            }
+            if (c == 'R') {
+                resetFMU();
+                delay_ms(1);
+                releaseFMU();
+            }
+        }
     };
     return ( EXIT_FAILURE);
 }

@@ -13,6 +13,7 @@
 #include "led.h"
 
 void initDebug(void) {
+    TRISBbits.TRISB6 = 1; //U5RX
     U5BRG = 129; //115200 baud
     U5MODEbits.BRGH = 1;
     U5STAbits.URXEN = 1;

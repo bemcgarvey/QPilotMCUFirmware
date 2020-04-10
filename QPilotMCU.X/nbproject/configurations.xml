@@ -12,6 +12,7 @@
       <itemPath>../src/power.h</itemPath>
       <itemPath>../src/debug.h</itemPath>
       <itemPath>../src/fmu.h</itemPath>
+      <itemPath>../src/spi.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -28,6 +29,7 @@
       <itemPath>../src/power.c</itemPath>
       <itemPath>../src/debug.c</itemPath>
       <itemPath>../src/fmu.c</itemPath>
+      <itemPath>../src/spi.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
