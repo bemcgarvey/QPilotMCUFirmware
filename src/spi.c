@@ -11,8 +11,9 @@
 #include "device.h"
 #include "spi.h"
 #include "debug.h"
+#include "led.h"
 
-void initMCUtoFMUchannel(void) {
+void initMCUtoFMU(void) {
     //SPI3
     TRISBbits.TRISB3 = 1;
     SPI3CON = 0;
@@ -49,4 +50,33 @@ bool transferMCUtoFMU(uint8_t *txBuff, int txBytes, uint8_t *rxBuff, int rxBytes
         ++rxBuff;
     }
     return true;
+}
+
+void initFMUtoMCUch1(void) {
+    TRISAbits.TRISA12 = 1;
+    TRISAbits.TRISA11 = 1;
+    SPI4CON = 0;
+    char c = SPI4BUF;
+    SPI4CONbits.ENHBUF = 0;
+    SPI4CONbits.MODE16 = 0;
+    SPI4CONbits.MODE32 = 0;  //8 bit transfers for now
+    SPI4CONbits.CKE = 1;
+    SPI4CONbits.CKP = 0;
+    SPI4CONbits.MSTEN = 0;
+    IFS6bits.SPI4RXIF = 0;
+    IPC55bits.SPI4RXIP = 4;
+    IPC55bits.SPI4RXIS = 0;
+    IEC6bits.SPI4RXIE = 1;
+    SPI4STATbits.SPIROV = 0;
+    SPI4CONbits.ON = 1;
+    SPI4BUF = 0;  //Initial data
+}
+
+//FMU to MCU channel 1
+void __ISR(_SPI4_RX_VECTOR, IPL4SOFT) spi4RxIsr(void) {
+    char c;
+    c = SPI4BUF;
+    SPI4BUF = 71;
+    printf("%d\r\n", c);
+    IFS6bits.SPI4RXIF = 0;
 }

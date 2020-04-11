@@ -22,10 +22,13 @@ int main(void) {
     initPins();
     releaseFMU();
     setPPS();
-    initMCUtoFMUchannel();
+    initMCUtoFMU();
+    initFMUtoMCUch1();
     initDebug();
     LED1Off();
     LED2On();
+    __builtin_set_isr_state(0);
+    __builtin_enable_interrupts();
     while (true) {
         char c = _mon_getc(false);
         if (c != EOF) {
@@ -43,7 +46,9 @@ int main(void) {
             }
             if (c == 'R') {
                 resetFMU();
-                delay_ms(1);
+            }
+            if (c == 'r') {
+                initFMUtoMCUch1();
                 releaseFMU();
             }
         }
