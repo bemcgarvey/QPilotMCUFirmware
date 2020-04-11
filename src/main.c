@@ -23,7 +23,7 @@ int main(void) {
     releaseFMU();
     setPPS();
     initMCUtoFMU();
-    initFMUtoMCUch1();
+    initFMUtoMCUch2();
     initDebug();
     LED1Off();
     LED2On();
@@ -48,7 +48,6 @@ int main(void) {
                 resetFMU();
             }
             if (c == 'r') {
-                initFMUtoMCUch1();
                 releaseFMU();
             }
         }

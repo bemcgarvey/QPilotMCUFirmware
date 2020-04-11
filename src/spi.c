@@ -14,7 +14,6 @@
 #include "led.h"
 
 void initMCUtoFMU(void) {
-    //SPI3
     TRISBbits.TRISB3 = 1;
     SPI3CON = 0;
     char c = SPI3BUF;
@@ -62,6 +61,7 @@ void initFMUtoMCUch1(void) {
     SPI4CONbits.MODE32 = 0;  //8 bit transfers for now
     SPI4CONbits.CKE = 1;
     SPI4CONbits.CKP = 0;
+    SPI4CONbits.SMP = 1;
     SPI4CONbits.MSTEN = 0;
     IFS6bits.SPI4RXIF = 0;
     IPC55bits.SPI4RXIP = 4;
@@ -79,4 +79,34 @@ void __ISR(_SPI4_RX_VECTOR, IPL4SOFT) spi4RxIsr(void) {
     SPI4BUF = 71;
     printf("%d\r\n", c);
     IFS6bits.SPI4RXIF = 0;
+}
+
+void initFMUtoMCUch2(void) {
+    TRISEbits.TRISE15 = 1;
+    TRISBbits.TRISB4 = 1;
+    SPI5CON = 0;
+    char c = SPI5BUF;
+    SPI5CONbits.ENHBUF = 0;
+    SPI5CONbits.MODE16 = 0;
+    SPI5CONbits.MODE32 = 0;  //8 bit transfers for now
+    SPI5CONbits.CKE = 1;
+    SPI5CONbits.CKP = 0;
+    SPI5CONbits.SMP = 1;
+    SPI5CONbits.MSTEN = 0;
+    IFS7bits.SPI5RXIF = 0;
+    IPC56bits.SPI5RXIP = 4;
+    IPC56bits.SPI5RXIS = 0;
+    IEC7bits.SPI5RXIE = 1;
+    SPI5STATbits.SPIROV = 0;
+    SPI5CONbits.DISSDO = 1;
+    SPI5CONbits.ON = 1;
+    SPI5BUF = 0;  //Initial data
+}
+
+//FMU to MCU channel 2
+void __ISR(_SPI5_RX_VECTOR, IPL4SOFT) spi5RxIsr(void) {
+    char c;
+    c = SPI5BUF;
+    printf("%d\r\n", c);
+    IFS7bits.SPI5RXIF = 0;
 }
